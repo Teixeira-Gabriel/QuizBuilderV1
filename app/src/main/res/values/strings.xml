@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QuizBuilderV1</string>
+    <string name="btnChoice1">option1</string>
+    <string name="btnChoice2">option2</string>
+    <string name="btnChoice3">option3</string>
+    <string name="btnChoice4">option4</string>
+    <string name="textViewCounts">1/1</string>
+    <string name="textViewQuestion">Question</string>
+    <string name="btnStartQuizz">Start</string>
+</resources>
