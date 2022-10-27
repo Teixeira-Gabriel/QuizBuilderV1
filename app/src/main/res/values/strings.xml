@@ -7,4 +7,5 @@
     <string name="textViewCounts">1/1</string>
     <string name="textViewQuestion">Question</string>
     <string name="btnStartQuizz">Start</string>
+    <string name="texViewResults">resuylts</string>
 </resources>

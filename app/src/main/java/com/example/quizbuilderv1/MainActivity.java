@@ -7,6 +7,9 @@ import android.view.*;
 import android.widget.*;
 import android.content.Intent;
 import android.net.Uri;//URLs
+import android.view.*;
+import java.io.*;
+import java.util.StringTokenizer;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnChoice4 = findViewById(R.id.btnChoice4);
         textViewCounts = findViewById(R.id.textViewCounts);
         textViewQuestion = findViewById(R.id.textViewQuestion);
+
 
         //Events
         btnChoice1.setOnClickListener(new View.OnClickListener() {
@@ -56,25 +60,47 @@ public class MainActivity extends AppCompatActivity {
         btnChoice2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent("MainActivity2");
+                Intent i = new Intent(MainActivity.this, MainActivity2.class);
                 Bundle extras = new Bundle();
                 extras.putString("Key", "Information to send, like variables");
                 i.putExtras(extras);
-                //startActivity(i,extras);
-                startActivityForResult(i,1);
+                startActivity(i,extras);
+                //registerForActivityResult(i,1);
+            }
+        });
+
+        btnChoice3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String str = null;
+                BufferedReader br = null;
+                try {
+                    InputStream is = getResources().openRawResource(R.raw.quiz);
+                    br = new BufferedReader(new InputStreamReader(is));
+                    System.out.println("File in RAW is open");
+                    while ((str = br.readLine()) != null) {
+                        System.out.println(str);
+
+                        //StringTokenizer
+                        StringTokenizer stringTokenizer = new StringTokenizer(str);
+                        while (stringTokenizer.hasMoreTokens()){
+                            System.out.println(" "+stringTokenizer.nextToken(":"));
+                        }
+                    }
+                    is.close();
+                    System.out.println("File in RAW is closed");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }//end Oncreate
 
-
-
-
-
-
-
-
-
-
+//File Reading
 
 
 
