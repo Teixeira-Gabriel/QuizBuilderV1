@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;//URLs
 import android.view.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.HashMap;
@@ -85,12 +86,11 @@ public class MainActivity extends AppCompatActivity {
                     br = new BufferedReader(new InputStreamReader(is));
                     System.out.println("File in RAW is open");
 
-                    str = br.readLine();
 
-                    Map<String,String> map = new HashMap<String,String>();//create map
 
                     ArrayList<Object> keyA = new ArrayList<Object>();
                     ArrayList<Object> valueA = new ArrayList<Object>();
+                    int i = 1;
 
                     while ((str = br.readLine()) != null)  //just for testing read line
                     {
@@ -99,12 +99,29 @@ public class MainActivity extends AppCompatActivity {
                         for (String actualElement : str.split(":") )
                         {
 
+                            String i1 = new String(actualElement);
+
+                            if ( i % 2 == 0) {
+                                valueA.add(i1);
+                            }
+                            else{
+                                keyA.add(i1);
+                            }
+                            i++;
+
+
                         }
+
                     }
+                    System.out.println("The content of the Key Arraylist is: " + keyA);
+                    System.out.println("The content of the Valule Arraylist is: " + valueA);
 
+                    Map<String,String> map = new HashMap<String,String>();//create map
 
-
-                    System.out.println(map);
+                    for (int j = 0; j == keyA.size(); j++){
+                        map.put(Array.get(keyA, j).toString(), Array.get(valueA, j).toString());
+                    }
+                    System.out.println("Map: "+map);
 
                         //StringTokenizer
 //                        StringTokenizer stringTokenizer = new StringTokenizer(str);
