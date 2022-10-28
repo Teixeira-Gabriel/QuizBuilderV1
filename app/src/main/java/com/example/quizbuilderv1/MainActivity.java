@@ -9,7 +9,11 @@ import android.content.Intent;
 import android.net.Uri;//URLs
 import android.view.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -80,15 +84,51 @@ public class MainActivity extends AppCompatActivity {
                     InputStream is = getResources().openRawResource(R.raw.quiz);
                     br = new BufferedReader(new InputStreamReader(is));
                     System.out.println("File in RAW is open");
-                    while ((str = br.readLine()) != null) {
+
+                    str = br.readLine();
+
+                    Map<String,String> map = new HashMap<String,String>();//create map
+
+                    ArrayList<Object> keyA = new ArrayList<Object>();
+                    ArrayList<Object> valueA = new ArrayList<Object>();
+
+                    while ((str = br.readLine()) != null)  //just for testing read line
+                    {
                         System.out.println(str);
 
-                        //StringTokenizer
-                        StringTokenizer stringTokenizer = new StringTokenizer(str);
-                        while (stringTokenizer.hasMoreTokens()){
-                            System.out.println(" "+stringTokenizer.nextToken(":"));
+                        for (String actualElement : str.split(":") )
+                        {
+
                         }
                     }
+
+
+
+                    System.out.println(map);
+
+                        //StringTokenizer
+//                        StringTokenizer stringTokenizer = new StringTokenizer(str);
+//
+//                        while (stringTokenizer.hasMoreTokens())
+//                        {
+//                            System.out.println(" "+stringTokenizer.nextToken(":"));
+//
+//                            String key = stringTokenizer.nextToken(":");
+//                            String value = stringTokenizer.nextToken(":");
+//
+//
+//                            map.put( "key", "value");
+//
+//                            Iterator<String> myIterator=map.values().iterator();//create iterator
+//
+//                            while(myIterator.hasNext())
+//                            {//display colors using toast
+//                                System.out.println(map.get("Question 1?"));
+//                            }//end while
+//                        }
+
+
+//
                     is.close();
                     System.out.println("File in RAW is closed");
                 } catch (IOException e) {

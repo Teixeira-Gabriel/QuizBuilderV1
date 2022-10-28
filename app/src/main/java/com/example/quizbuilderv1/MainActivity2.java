@@ -143,6 +143,10 @@ public class MainActivity2 extends AppCompatActivity {
 //        map.get("Color1");//to take a key and grab an associate value back
 //    }//end onCreate
 
+
+
+
+
 //    //Demo of an Internal Write, Internal Read, and a res/raw read (read only)
 //// To create a RAW folder: Right click on app. click 'new' on popup then click on android
 //    resource director
