@@ -11,6 +11,7 @@ import android.view.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
     Button btnChoice1, btnChoice2, btnChoice3, btnChoice4;
     TextView textViewCounts, textViewQuestion;
 
+    ArrayList<String> keyA = new ArrayList<String>();
+    Map<String,String> map = new HashMap<String,String>();//create map
+
+    public int getRandomNumber (int min, int max){
+return (int) ((Math.random() * (max - min))+min);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,59 @@ public class MainActivity extends AppCompatActivity {
         textViewCounts = findViewById(R.id.textViewCounts);
         textViewQuestion = findViewById(R.id.textViewQuestion);
 
+
+        String str = null;
+        BufferedReader br = null;
+        try {
+            InputStream is = getResources().openRawResource(R.raw.quiz);
+            br = new BufferedReader(new InputStreamReader(is));
+            System.out.println("File in RAW is open");
+
+//            ArrayList<String> keyA = new ArrayList<String>();
+            ArrayList<String> valueA = new ArrayList<String>();
+            int i = 1;
+
+            while ((str = br.readLine()) != null)  //just for testing read line
+            {
+                System.out.println(str);
+
+                for (String actualElement : str.split(":") )
+                {
+
+                    String i1 = new String(actualElement);
+
+                    if ( i % 2 == 0) {
+                        valueA.add(i1);
+                    }
+                    else{
+                        keyA.add(i1);
+                    }
+                    i++;
+
+
+                }
+
+            }
+            System.out.println("The content of the Key Arraylist is: " + keyA);
+            System.out.println("The content of the Valule Arraylist is: " + valueA);
+
+//            Map<String,String> map = new HashMap<String,String>();//create map
+
+            for (int j = 0; j <= 9; j++){
+                //map.put("Key", "Value");
+                String arrayIndexKey = keyA.get(j);
+                String arrayIndexValue = valueA.get(j);
+                map.put(arrayIndexKey, arrayIndexValue);
+            }
+            System.out.println("Map: "+map);
+
+            is.close();
+            System.out.println("File in RAW is closed");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
 
         //Events
         btnChoice1.setOnClickListener(new View.OnClickListener() {
@@ -76,89 +136,91 @@ public class MainActivity extends AppCompatActivity {
 
         btnChoice3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
 
-                String str = null;
-                BufferedReader br = null;
-                try {
-                    InputStream is = getResources().openRawResource(R.raw.quiz);
-                    br = new BufferedReader(new InputStreamReader(is));
-                    System.out.println("File in RAW is open");
-
-
-
-                    ArrayList<Object> keyA = new ArrayList<Object>();
-                    ArrayList<Object> valueA = new ArrayList<Object>();
-                    int i = 1;
-
-                    while ((str = br.readLine()) != null)  //just for testing read line
-                    {
-                        System.out.println(str);
-
-                        for (String actualElement : str.split(":") )
-                        {
-
-                            String i1 = new String(actualElement);
-
-                            if ( i % 2 == 0) {
-                                valueA.add(i1);
-                            }
-                            else{
-                                keyA.add(i1);
-                            }
-                            i++;
-
-
-                        }
-
-                    }
-                    System.out.println("The content of the Key Arraylist is: " + keyA);
-                    System.out.println("The content of the Valule Arraylist is: " + valueA);
-
-                    Map<String,String> map = new HashMap<String,String>();//create map
-
-                    for (int j = 0; j == keyA.size(); j++){
-                        map.put(Array.get(keyA, j).toString(), Array.get(valueA, j).toString());
-                    }
-                    System.out.println("Map: "+map);
-
-                        //StringTokenizer
-//                        StringTokenizer stringTokenizer = new StringTokenizer(str);
+//                String str = null;
+//                BufferedReader br = null;
+//                try {
+//                    InputStream is = getResources().openRawResource(R.raw.quiz);
+//                    br = new BufferedReader(new InputStreamReader(is));
+//                    System.out.println("File in RAW is open");
 //
-//                        while (stringTokenizer.hasMoreTokens())
+//                    ArrayList<String> keyA = new ArrayList<String>();
+//                    ArrayList<String> valueA = new ArrayList<String>();
+//                    int i = 1;
+//
+//                    while ((str = br.readLine()) != null)  //just for testing read line
+//                    {
+//                        System.out.println(str);
+//
+//                        for (String actualElement : str.split(":") )
 //                        {
-//                            System.out.println(" "+stringTokenizer.nextToken(":"));
 //
-//                            String key = stringTokenizer.nextToken(":");
-//                            String value = stringTokenizer.nextToken(":");
+//                            String i1 = new String(actualElement);
+//
+//                            if ( i % 2 == 0) {
+//                                valueA.add(i1);
+//                            }
+//                            else{
+//                                keyA.add(i1);
+//                            }
+//                            i++;
 //
 //
-//                            map.put( "key", "value");
-//
-//                            Iterator<String> myIterator=map.values().iterator();//create iterator
-//
-//                            while(myIterator.hasNext())
-//                            {//display colors using toast
-//                                System.out.println(map.get("Question 1?"));
-//                            }//end while
 //                        }
-
-
 //
-                    is.close();
-                    System.out.println("File in RAW is closed");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }catch(Exception e) {
-                    e.printStackTrace();
+//                    }
+//                    System.out.println("The content of the Key Arraylist is: " + keyA);
+//                    System.out.println("The content of the Valule Arraylist is: " + valueA);
+//
+//                    Map<String,String> map = new HashMap<String,String>();//create map
+//
+//                    for (int j = 0; j <= 9; j++){
+//                        //map.put("Key", "Value");
+//                        String arrayIndexKey = keyA.get(j);
+//                        String arrayIndexValue = valueA.get(j);
+//                        map.put(arrayIndexKey, arrayIndexValue);
+//                    }
+//                    System.out.println("Map: "+map);
+//
+//                    is.close();
+//                    System.out.println("File in RAW is closed");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }catch(Exception e) {
+//                    e.printStackTrace();
+//                }
+            }
+        });//End Button
+
+        btnChoice4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+//                String arrayIndexKey = keyA.get(j);
+//                String arrayIndexKey = Arrays.toString(keyA);
+                String arrayIndexKey2 = keyA.get(1);
+            textViewQuestion.setText(arrayIndexKey2);
+
+            String rightChoice = map.get(arrayIndexKey2);
+            btnChoice1.setText(rightChoice);
+
+            int random = getRandomNumber(1,4);
+            System.out.println("Random number is: "+random);
+                if (random == 1)
+                {
+                    btnChoice1.setBackgroundColor(100);
+                }
+                else {
+                    btnChoice2.setBackgroundColor(2);
                 }
             }
+
+
         });
     }//end Oncreate
 
-//File Reading
-
-
-
 }//end Main
+
